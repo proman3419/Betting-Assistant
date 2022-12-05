@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="betting-assistant:war">
+    <output-path>$PROJECT_DIR$/betting-assistant/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>betting-assistant</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="betting-assistant-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="betting-assistant:war exploded" />
+    </root>
+  </artifact>
+</component>
