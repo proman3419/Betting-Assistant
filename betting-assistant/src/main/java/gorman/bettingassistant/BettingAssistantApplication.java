@@ -14,10 +14,11 @@ public class BettingAssistantApplication {
 //        TeamStatistics ts = new TeamStatistics(JsonHelper.loadFromFile("responses/statistics.json"));
         String apiKey = ApiKeyLoader.loadFromFile("api_key.txt");
         FootballApi footballApi = new FootballApi(apiKey);
-        TeamStatistics ts = new TeamStatistics(footballApi.getTeamStatistics("49"));
-        System.out.println(ts);
+//        TeamStatistics ts = new TeamStatistics(footballApi.getTeamStatistics("49"));
+//        System.out.println(ts);
 //        System.out.println(footballApi.getTeams());
-//        System.out.println(footballApi.getH2H("49", "40"));
+//        H2HStatistics h2hs = new H2HStatistics(footballApi.getH2H("49", "40"));
+        H2HStatistics h2hs = new H2HStatistics(JsonHelper.loadFromFile("responses/h2h.json"));
         SpringApplication.run(BettingAssistantApplication.class, args);
     }
 

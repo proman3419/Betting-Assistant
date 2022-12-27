@@ -68,11 +68,11 @@ public class FootballApi {
         return sendRequest(apiUri);
     }
 
-    public JsonNode getH2H(String teamId1, String teamId2) {
+    public JsonNode getH2H(String team1Id, String team2Id) {
         List<NameValuePair> params = new ArrayList<>(Arrays.asList(
                 new BasicHeader("last", LAST_MATCHES_COUNT),
                 new BasicHeader("status", MATCH_STATUS),
-                new BasicHeader("h2h", teamId1 + "-" + teamId2)));
+                new BasicHeader("h2h", team1Id + "-" + team2Id)));
         URI apiUri = createApiUri("fixtures/headtohead", params);
         return sendRequest(apiUri);
     }
