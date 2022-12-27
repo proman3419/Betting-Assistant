@@ -19,13 +19,15 @@ public class AlgoTesting {
          */
         AHP ahp = new AHP();
         Alternative win = new Alternative("win", 1.58, 0.6, 0.6, 0.4);
-        Alternative draw = new Alternative("draw", 1.86, 0, 0.4, 0.4);
-        Alternative lose = new Alternative("lose", 2.14, 0.4, 0, 0.2);
+        Alternative draw = new Alternative("draw", 1.86, 0.001, 0.4, 0.4);
+        Alternative lose = new Alternative("lose", 2.14, 0.4, 0.001, 0.2);
 
         ahp.addAlternative("win", win);
         ahp.addAlternative("draw", draw);
         ahp.addAlternative("lose", lose);
 
         ahp.createMatrixes();
+        ahp.createPrioritizationVectors();
+        System.out.println(ahp.getBestAlternative());
     }
 }

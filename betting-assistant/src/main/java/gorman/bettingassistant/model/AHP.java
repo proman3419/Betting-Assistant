@@ -3,15 +3,18 @@ package gorman.bettingassistant.model;
 import org.ejml.simple.SimpleMatrix;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class AHP {
-    private final Map<String, Alternative> alternatives = new HashMap<>();
+    private final List<Alternative> alternatives = new ArrayList<>();
     private final Map<Attributes, SimpleMatrix> matrixes = new HashMap<>();
+    private final Map<Attributes, SimpleMatrix> prioritizationVectors = new HashMap<>();
     private final Map<Integer, Alternative> alternativeById = new HashMap<>();
 
     public void addAlternative(String name, Alternative alternative){
-        alternatives.put(name, alternative);
+        alternatives.add(alternative);
         alternativeById.put(alternativeById.size(), alternative);
     }
 
@@ -28,9 +31,64 @@ public class AHP {
         return matrix;
     }
 
+    //https://people.revoledu.com/kardi/tutorial/AHP/Priority%20Vector.htm
+    private SimpleMatrix createPrioritizationVector(Attributes attribute){
+        SimpleMatrix attributeMatrix = matrixes.get(attribute);
+        int n = attributeMatrix.numRows();
+
+        SimpleMatrix attributeMatrixDividedByColSum = new SimpleMatrix(n,n);
+        IntStream.range(0, n).forEach(i -> {
+            double colSum = IntStream.range(0, n).mapToDouble(j -> attributeMatrix.get(j, i)).sum();
+
+            IntStream.range(0, n).forEach(j -> {
+                attributeMatrixDividedByColSum.set(j, i, attributeMatrix.get(j,i) / colSum);
+            });
+        });
+
+        SimpleMatrix matrix = new SimpleMatrix(alternatives.size(),1);
+        IntStream.range(0, n).forEach(i -> {
+            double rowSum = IntStream.range(0, n).mapToDouble(num -> attributeMatrixDividedByColSum.get(i,num)).sum();
+            matrix.set(i, 0, rowSum / n);
+        });
+
+//        System.out.println("=======================================");
+//        System.out.println("MATRIX");
+//        System.out.println(attributeMatrix);
+//        System.out.println("MATRIX DIVIDED");
+//        System.out.println(attributeMatrixDividedByColSum);
+//        System.out.println(Stream.of(0,1,2).map(i -> attributeMatrixDividedByColSum.get(0,i) + attributeMatrixDividedByColSum.get(1, i) + attributeMatrixDividedByColSum.get(2, i)).toList());
+//        System.out.println("MATRIX W");
+//        System.out.println(matrix);
+
+        return matrix;
+    }
+
     public void createMatrixes(){
-        Arrays.stream(Attributes.values()).parallel()
+        Arrays.stream(Attributes.values())
                 .forEach(attribute -> matrixes.put(attribute, createAttributeMatrix(attribute)));
+    }
+
+    public void createPrioritizationVectors(){
+        Arrays.stream(Attributes.values())
+                .forEach(attribute -> prioritizationVectors.put(attribute, createPrioritizationVector(attribute)));
+    }
+
+    public String getBestAlternative(){
+        List<Double> finalResults = new ArrayList<>();
+
+        IntStream.range(0, alternatives.size()).forEach(i -> {
+            finalResults.add(prioritizationVectors.keySet().stream().mapToDouble(a -> a.getPriority() * prioritizationVectors.get(a).get(i)).sum());
+        });
+
+        AtomicInteger bestId = new AtomicInteger();
+        IntStream.range(1, finalResults.size()).forEach(i -> {
+            if (finalResults.get(bestId.get()) < finalResults.get(i)){
+                bestId.set(i);
+            }
+        });
+
+        System.out.println(finalResults);
+        return alternatives.get(bestId.get()).getName();
     }
 
 }
