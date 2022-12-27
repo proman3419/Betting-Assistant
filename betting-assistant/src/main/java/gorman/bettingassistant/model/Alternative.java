@@ -1,6 +1,7 @@
 package gorman.bettingassistant.model;
 
 public class Alternative {
+    private final double minRatioValue = 0.0001;
     private final String name;
     private final double betOdds;
     private final double ratio;
@@ -10,9 +11,9 @@ public class Alternative {
     public Alternative(String name, double betOdds, double ratio, double opponentRatio, double h2hRatio) {
         this.name = name;
         this.betOdds = betOdds;
-        this.opponentRatio = opponentRatio;
-        this.ratio = ratio;
-        this.h2hRatio = h2hRatio;
+        this.opponentRatio = Math.max(opponentRatio, minRatioValue);
+        this.ratio = Math.max(ratio, minRatioValue);
+        this.h2hRatio = Math.max(h2hRatio, minRatioValue);
     }
 
     public double getAttribute(Attributes attribute) {
@@ -26,5 +27,16 @@ public class Alternative {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Alternative{" +
+                "name='" + name + '\'' +
+                ", betOdds=" + betOdds +
+                ", ratio=" + ratio +
+                ", opponentRatio=" + opponentRatio +
+                ", h2hRatio=" + h2hRatio +
+                '}';
     }
 }

@@ -72,6 +72,7 @@ public class AHP {
             }
         });
 
+        System.out.println("FINAL RESULTS: " + finalResults);
         return alternatives.get(bestId.get()).getName();
     }
 
