@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class BettingAssistantApplication {
 
     public static void main(String[] args) {
-        TeamStatistics ts = new TeamStatistics(JsonHelper.loadFromFile("responses/statistics.json"));
+//        TeamStatistics ts = new TeamStatistics(JsonHelper.loadFromFile("responses/statistics.json"));
         String apiKey = ApiKeyLoader.loadFromFile("api_key.txt");
         FootballApi footballApi = new FootballApi(apiKey);
-        System.out.println(footballApi.getTeams());
+        TeamStatistics ts = new TeamStatistics(footballApi.getTeamStatistics("49"));
+        System.out.println(ts);
+//        System.out.println(footballApi.getTeams());
+//        System.out.println(footballApi.getH2H("49", "40"));
         SpringApplication.run(BettingAssistantApplication.class, args);
     }
 

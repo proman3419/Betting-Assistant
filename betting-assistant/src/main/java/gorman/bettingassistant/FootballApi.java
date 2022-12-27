@@ -1,8 +1,10 @@
 package gorman.bettingassistant;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import jakarta.annotation.Nullable;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.message.BasicHeader;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URI;
@@ -10,12 +12,13 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static gorman.bettingassistant.FootballApiConfig.*;
 
 public class FootballApi {
-    private static final String API_URL = "https://v3.football.api-sports.io";
-    private static final String API_HOST = "v3.football.api-sports.io";
-    private static final String SEASON = "2022";
-    private static final String LEAGUE_ID = "39";
     private final String apiKey;
 
     public FootballApi(String apiKey) {
@@ -29,16 +32,18 @@ public class FootballApi {
                 .GET();
     }
 
-    private URIBuilder getRequestUriBase(String apiUrlExtension) {
-        String apiUrl = apiUrlExtension.length() > 0 ? API_URL + "/" + apiUrlExtension : API_URL;
+    private URI createApiUri(String apiUriExtension, List<NameValuePair> params) {
+        String apiUriBase = apiUriExtension.length() > 0 ? API_URL + "/" + apiUriExtension : API_URL;
         try {
-            return new URIBuilder(apiUrl);
+            return new URIBuilder(apiUriBase).addParameters(params).build();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private JsonNode sendRequest(HttpRequest.Builder requestBuilder) {
+    private JsonNode sendRequest(URI apiUri) {
+        HttpRequest.Builder requestBuilder = getRequestBase();
+        requestBuilder.uri(apiUri);
         HttpRequest request = requestBuilder.build();
         HttpClient client = HttpClient.newBuilder().build();
         HttpResponse<String> response;
@@ -55,19 +60,29 @@ public class FootballApi {
         return responseBody;
     }
 
-    @Nullable
     public JsonNode getTeams() {
-        HttpRequest.Builder requestBuilder = getRequestBase();
-        URI apiUri;
-        try {
-            apiUri = getRequestUriBase("/teams")
-                    .addParameter("season", SEASON)
-                    .addParameter("league", LEAGUE_ID)
-                    .build();
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-        requestBuilder.uri(apiUri);
-        return sendRequest(requestBuilder);
+        List<NameValuePair> params = new ArrayList<>(Arrays.asList(
+                new BasicHeader("season", SEASON),
+                new BasicHeader("league", LEAGUE_ID)));
+        URI apiUri = createApiUri("teams", params);
+        return sendRequest(apiUri);
+    }
+
+    public JsonNode getH2H(String teamId1, String teamId2) {
+        List<NameValuePair> params = new ArrayList<>(Arrays.asList(
+                new BasicHeader("last", LAST_MATCHES_COUNT),
+                new BasicHeader("status", MATCH_STATUS),
+                new BasicHeader("h2h", teamId1 + "-" + teamId2)));
+        URI apiUri = createApiUri("fixtures/headtohead", params);
+        return sendRequest(apiUri);
+    }
+
+    public JsonNode getTeamStatistics(String teamId) {
+        List<NameValuePair> params = new ArrayList<>(Arrays.asList(
+                new BasicHeader("season", SEASON),
+                new BasicHeader("league", LEAGUE_ID),
+                new BasicHeader("team", teamId)));
+        URI apiUri = createApiUri("teams/statistics", params);
+        return sendRequest(apiUri);
     }
 }
