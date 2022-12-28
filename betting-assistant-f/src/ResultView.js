@@ -1,9 +1,9 @@
 import './App.css';
 
 function ResultView() {
-    return (
-      <a>HELLO</a>
-    )
+  return (
+    <p>HELLO</p>
+  )
 }
 
 export default ResultView;

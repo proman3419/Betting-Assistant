@@ -1,15 +1,17 @@
 import './App.css';
 import FormView from './FormView.js';
 import ResultView from './ResultView';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
-    <Routes>
-          <Route path="/resultView" element={ <ResultView /> } />
-          <Route path="/" element={ <FormView /> } />
-    </Routes>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<FormView />} />
+        <Route path="resultView" element={<ResultView />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
