@@ -1,7 +1,38 @@
 import './App.css';
 import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
+import ResultView from './ResultView';
 
 function FormView() {
+  function handleSubmit(e) {
+    console.log("ASDSA")
+    console.log(document.getElementById("team1Input").value)
+    console.log(JSON.stringify({
+      team1Id: document.getElementById("team1Input").value,
+      team2Id: document.getElementById("team2Input").value,
+      team1Odds: document.getElementById("resultTeam1WinBetOddsInput").value,
+      drawOdds: document.getElementById("resultTieBetOddsInput").value,
+      team2Odds: document.getElementById("resultTeam2WinBetOddsInput").value,
+    }))
+    e.preventDefault()
+    fetch("http://localhost:8080/chooseTicket", {
+      method: "POST",
+      headers: {"Content-Type": "application/json", 'Accept': 'application/json'},
+      body: JSON.stringify({
+        team1Id: document.getElementById("team1Input").value,
+        team2Id: document.getElementById("team2Input").value,
+        team1Odds: document.getElementById("resultTeam1WinBetOddsInput").value,
+        drawOdds: document.getElementById("resultTieBetOddsInput").value,
+        team2Odds: document.getElementById("resultTeam2WinBetOddsInput").value
+      })
+    })
+    .then((response) => response.json())
+    .then(data => { 
+      console.log(data);
+      window.location.href = "/resultView?result=" + data["result"];
+    });
+  }
+
   return (
     <div id="superDiv">
       <div id="team1Div">
@@ -16,10 +47,6 @@ function FormView() {
         <label for="resultTeam1WinBetOddsInput">resultTeam1WinBetOdds</label>
         <input id="resultTeam1WinBetOddsInput" name="resultTeam1WinBetOddsInput" type="text"></input>
       </div>
-      <div id="resultTeam1WinBetOddsDiv">
-        <label for="resultTeam1WinBetOddsInput">resultTeam1WinBetOdds</label>
-        <input id="resultTeam1WinBetOddsInput" name="resultTeam1WinBetOddsInput" type="text"></input>
-      </div>
       <div id="resultTieBetOddsDiv">
         <label for="resultTieBetOddsInput">resultTieBetOdds</label>
         <input id="resultTieBetOddsInput" name="resultTieBetOddsInput" type="text"></input>
@@ -28,7 +55,10 @@ function FormView() {
         <label for="resultTeam2WinBetOddsInput">resultTeam2WinBetOdds</label>
         <input id="resultTeam2WinBetOddsInput" name="resultTeam2WinBetOddsInput" type="text"></input>
       </div>
-      <Link to="resultView" id="calculateButton">adsfads</Link>
+      <form id="calculateForm">
+        <Button id="calculateButton" type="submit" onClick={handleSubmit}>Submit</Button>
+        {/* <Link to="resultView" id="calculateButton">adsfads</Link> */}
+      </form>
     </div>
   );
 }
