@@ -1,0 +1,61 @@
+#superDiv {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  background-color: greenyellow;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(5, 1fr);
+  row-gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+#teamsDiv {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+  height: 30%;
+  background-color: yellow;
+}
+
+#inputDiv {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 500px;
+  height: 70%;
+  background-color: red;
+}
+
+#team1Div {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#team2Div {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+#resultTeam1WinBetOddsDiv {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+#resultTieBetOddsDiv {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+#resultTeam2WinBetOddsDiv {
+  grid-column: 2;
+  grid-row: 4;
+}
+
+#calculateButton {
+  grid-column: 2;
+  grid-row: 5;
+}
