@@ -1,4 +1,4 @@
-package gorman.bettingassistant.model;
+package gorman.bettingassistant.algorithm;
 
 public class Alternative {
     private final double minRatioValue = 0.0001;

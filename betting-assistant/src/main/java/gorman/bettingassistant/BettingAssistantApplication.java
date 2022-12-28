@@ -1,8 +1,12 @@
 package gorman.bettingassistant;
 
-import gorman.bettingassistant.model.AHP;
-import gorman.bettingassistant.model.Alternative;
-import org.springframework.boot.SpringApplication;
+import gorman.bettingassistant.api.ApiKeyLoader;
+import gorman.bettingassistant.api.FootballApi;
+import gorman.bettingassistant.algorithm.AHP;
+import gorman.bettingassistant.algorithm.Alternative;
+import gorman.bettingassistant.model.H2HStatistics;
+import gorman.bettingassistant.model.MatchResult;
+import gorman.bettingassistant.model.TeamStatistics;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

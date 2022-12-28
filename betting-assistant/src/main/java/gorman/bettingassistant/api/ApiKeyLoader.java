@@ -1,4 +1,4 @@
-package gorman.bettingassistant;
+package gorman.bettingassistant.api;
 
 import java.io.File;
 import java.io.IOException;

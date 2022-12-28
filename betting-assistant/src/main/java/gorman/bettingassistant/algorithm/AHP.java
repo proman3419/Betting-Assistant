@@ -1,4 +1,4 @@
-package gorman.bettingassistant.model;
+package gorman.bettingassistant.algorithm;
 
 import org.ejml.simple.SimpleMatrix;
 import java.util.*;

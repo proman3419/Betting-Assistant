@@ -1,4 +1,4 @@
-package gorman.bettingassistant;
+package gorman.bettingassistant.helper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;

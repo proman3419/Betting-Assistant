@@ -1,4 +1,4 @@
-package gorman.bettingassistant;
+package gorman.bettingassistant.model;
 
 public enum MatchResult {
     W, // WIN

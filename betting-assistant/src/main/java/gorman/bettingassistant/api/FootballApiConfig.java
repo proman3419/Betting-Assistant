@@ -1,4 +1,4 @@
-package gorman.bettingassistant;
+package gorman.bettingassistant.api;
 
 public class FootballApiConfig {
     public static final String API_URL = "https://v3.football.api-sports.io";
