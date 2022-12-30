@@ -1,4 +1,4 @@
-package gorman.bettingassistant.model;
+package gorman.bettingassistant.algorithm;
 
 public enum Attributes {
     BET_ODDS(0.125),

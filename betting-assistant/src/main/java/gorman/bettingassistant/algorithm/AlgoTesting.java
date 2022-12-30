@@ -1,4 +1,4 @@
-package gorman.bettingassistant.model;
+package gorman.bettingassistant.algorithm;
 
 public class AlgoTesting {
     public static void main(String[] args) {

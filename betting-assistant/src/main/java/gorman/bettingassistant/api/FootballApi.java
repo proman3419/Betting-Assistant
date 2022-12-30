@@ -1,10 +1,10 @@
-package gorman.bettingassistant;
+package gorman.bettingassistant.api;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import gorman.bettingassistant.helper.JsonHelper;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicHeader;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URI;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static gorman.bettingassistant.FootballApiConfig.*;
+import static gorman.bettingassistant.api.FootballApiConfig.*;
 
 public class FootballApi {
     private final String apiKey;

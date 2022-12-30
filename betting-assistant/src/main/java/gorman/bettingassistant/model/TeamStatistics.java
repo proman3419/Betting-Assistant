@@ -1,4 +1,4 @@
-package gorman.bettingassistant;
+package gorman.bettingassistant.model;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
