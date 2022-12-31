@@ -23,9 +23,9 @@ function FormView() {
       console.log(data);
       let result = data["result"];
       let resultPretty = "";
-      if (result == "win") {
+      if (result === "win") {
         resultPretty = "Team 1 will win";
-      } else if (result == "lose") {
+      } else if (result === "lose") {
         resultPretty = "Team 2 will win";
       } else {
         resultPretty = "Teams will draw";
@@ -40,7 +40,7 @@ function FormView() {
           <Row>
             <Col md={{ span: 6, offset: 3 }}>
               <Form.Group className="mb-3" controlId="team1Input">
-                <Form.Label>Team 1</Form.Label>
+                <Form.Label>Team 1 ID</Form.Label>
                 <Form.Control type="text" id="team1Input" name="team1Input" placeholder="Ex. 49" />
               </Form.Group>
             </Col>
@@ -49,7 +49,7 @@ function FormView() {
           <Row>
             <Col md={{ span: 6, offset: 3 }}>
               <Form.Group className="mb-3" controlId="team2Input">
-                <Form.Label>Team 1</Form.Label>
+                <Form.Label>Team 2 ID</Form.Label>
                 <Form.Control type="text" id="team2Input" name="team2Input" placeholder="Ex. 40" />
               </Form.Group>
             </Col>
