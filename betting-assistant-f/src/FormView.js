@@ -21,7 +21,16 @@ function FormView() {
     .then((response) => response.json())
     .then(data => { 
       console.log(data);
-      window.location.href = "/resultView?result=" + data["result"];
+      let result = data["result"];
+      let resultPretty = "";
+      if (result == "win") {
+        resultPretty = "Team 1 will win";
+      } else if (result == "lose") {
+        resultPretty = "Team 2 will win";
+      } else {
+        resultPretty = "Teams will draw";
+      }
+      window.location.href = "/resultView?result=" + resultPretty;
     });
   }
 

@@ -20,7 +20,7 @@ function App() {
               <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="formView">Assist me</a>
+              <a class="nav-link" href="formView">Betting assistance</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="teamsView">Teams</a>

@@ -76,3 +76,18 @@
   font-size: 32px;
   font-weight: bolder;
 }
+
+#resultDiv {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  background-color: rgba(57, 216, 182, 0.726);
+}
+
+#resultParagraph {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bolder;
+}

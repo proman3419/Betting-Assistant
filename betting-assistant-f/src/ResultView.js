@@ -6,7 +6,11 @@ function ResultView() {
   const params = new URLSearchParams(location.search);
 
   return (
-    <div>{params.get("result")}</div>
+    <div id="resultDiv">
+      <p id="resultParagraph">
+        {params.get("result")}
+      </p>
+    </div>
   )
 }
 
