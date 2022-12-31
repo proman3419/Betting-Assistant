@@ -9,7 +9,11 @@ import Col from 'react-bootstrap/Col';
 function FormView() {
   function handleSubmit(e) {
     console.log("ASDSA")
-    console.log(document.getElementById("team1Input").value)
+    console.log(document.getElementById("team1Input").value);
+    console.log(document.getElementById("team2Input").value);
+    console.log(document.getElementById("resultTeam1WinBetOddsInput").value);
+    console.log(document.getElementById("resultTieBetOddsInput").value);
+    console.log(document.getElementById("resultTeam2WinBetOddsInput").value);
     console.log(JSON.stringify({
       team1Id: document.getElementById("team1Input").value,
       team2Id: document.getElementById("team2Input").value,
@@ -38,12 +42,12 @@ function FormView() {
 
   return (
       <Container >
-        <Form onSubmit={handleSubmit}>
+        <Form>
           <Row>
             <Col md={{ span: 6, offset: 3 }}>
               <Form.Group className="mb-3" controlId="team1Input">
                 <Form.Label>Team 1</Form.Label>
-                <Form.Control type="text" id="team1Input" name="team1Input" placeholder="Team 1 ID" />
+                <Form.Control type="text" id="team1Input" name="team1Input" placeholder="Ex. 49" />
               </Form.Group>
             </Col>
           </Row>
@@ -52,7 +56,7 @@ function FormView() {
             <Col md={{ span: 6, offset: 3 }}>
               <Form.Group className="mb-3" controlId="team2Input">
                 <Form.Label>Team 1</Form.Label>
-                <Form.Control type="text" id="team2Input" name="team2Input" placeholder="Team 2 ID" />
+                <Form.Control type="text" id="team2Input" name="team2Input" placeholder="Ex. 40" />
               </Form.Group>
             </Col>
           </Row>
@@ -61,7 +65,7 @@ function FormView() {
             <Col md={{ span: 6, offset: 3 }}>
               <Form.Group className="mb-3" controlId="resultTeam1WinBetOddsDiv">
                 <Form.Label>Bet Odds for TEAM 1 WIN</Form.Label>
-                <Form.Control type="text" id="resultTeam1WinBetOddsInput" name="resultTeam1WinBetOddsInput"/>
+                <Form.Control type="text" id="resultTeam1WinBetOddsInput" name="resultTeam1WinBetOddsInput" placeholder="Ex. 2.14"/>
               </Form.Group>
             </Col>
           </Row>
@@ -70,7 +74,7 @@ function FormView() {
             <Col md={{ span: 6, offset: 3 }}>
               <Form.Group className="mb-3" controlId="resultTieBetOddsDiv">
                 <Form.Label>Bet Odds for DRAW</Form.Label>
-                <Form.Control type="text" id="resultTieBetOddsDiv" name="resultTieBetOddsDiv"/>
+                <Form.Control type="text" id="resultTieBetOddsInput" name="resultTieBetOddsInput" placeholder="Ex. 1.77"/>
               </Form.Group>
             </Col>
           </Row>
@@ -79,14 +83,14 @@ function FormView() {
             <Col md={{ span: 6, offset: 3 }}>
               <Form.Group className="mb-3" controlId="resultTeam2WinBetOddsDiv">
                 <Form.Label>Bet Odds for TEAM 2 WIN</Form.Label>
-                <Form.Control type="text" id="resultTeam2WinBetOddsDiv" name="resultTeam2WinBetOddsDiv"/>
+                <Form.Control type="text" id="resultTeam2WinBetOddsInput" name="resultTeam2WinBetOddsInput" placeholder="Ex. 1.53"/>
               </Form.Group>
             </Col>
           </Row>
 
           <Row>
             <Col md={{ span: 6, offset: 3 }} className="text-center">
-              <Button variant="primary" type="submit">
+              <Button variant="primary" onClick={handleSubmit}>
                 Submit
               </Button>
             </Col>
