@@ -37,7 +37,6 @@ public class AlgoInterface {
                 ts2.getForm().get(MatchResult.W) / t2Size,
                 h2h.getResults().get(MatchResult.L) / h2hSize);
 
-        ahp.addAlternative(win);
         ahp.addAlternative(draw);
         ahp.addAlternative(lose);
 

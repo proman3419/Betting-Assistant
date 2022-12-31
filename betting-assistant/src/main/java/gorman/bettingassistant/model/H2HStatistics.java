@@ -20,6 +20,9 @@ public class H2HStatistics {
 
     private EnumMap<MatchResult, Integer> parseResults(JsonNode H2HRaw) {
         EnumMap<MatchResult, Integer> resultsParsed = new EnumMap<>(MatchResult.class);
+        resultsParsed.put(MatchResult.W, 0);
+        resultsParsed.put(MatchResult.D, 0);
+        resultsParsed.put(MatchResult.L, 0);
         List<JsonNode> matches = H2HRaw.findValues("teams");
         for (JsonNode match : matches) {
             JsonNode home = match.findValue("home");
