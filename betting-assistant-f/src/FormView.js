@@ -1,7 +1,11 @@
 import './App.css';
 import { Link } from 'react-router-dom';
 import ResultView from './ResultView';
-import { Button, ButtonGroup, Dropdown } from "react-bootstrap";
+import { Button, ButtonGroup, Dropdown, Form, FormGroup } from "react-bootstrap";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 function FormView() {
   function handleSubmit(e) {
     console.log("ASDSA")
@@ -33,34 +37,63 @@ function FormView() {
   }
 
   return (
-      <div id="backgroundDiv">
-        <div id="superDiv">
-          <div id="team1Div">
-            <label for="team1Input">Team 1</label>
-            <input id="team1Input" name="team1Input" type="text"></input>
-          </div>
-          <div id="team2Div">
-            <label for="team2Input">Team 2</label>
-            <input id="team2Input" name="team2Input" type="text"></input>
-          </div>
-          <div id="resultTeam1WinBetOddsDiv">
-            <label for="resultTeam1WinBetOddsInput">resultTeam1WinBetOdds</label>
-            <input id="resultTeam1WinBetOddsInput" name="resultTeam1WinBetOddsInput" type="text"></input>
-          </div>
-          <div id="resultTieBetOddsDiv">
-            <label for="resultTieBetOddsInput">resultTieBetOdds</label>
-            <input id="resultTieBetOddsInput" name="resultTieBetOddsInput" type="text"></input>
-          </div>
-          <div id="resultTeam2WinBetOddsDiv">
-            <label for="resultTeam2WinBetOddsInput">resultTeam2WinBetOdds</label>
-            <input id="resultTeam2WinBetOddsInput" name="resultTeam2WinBetOddsInput" type="text"></input>
-          </div>
-          <form id="calculateForm">
-            <Button id="calculateButton" type="submit" onClick={handleSubmit}>Submit</Button>
-            {/* <Link to="resultView" id="calculateButton">adsfads</Link> */}
-          </form>
-        </div>
-      </div>
+      <Container >
+        <Form onSubmit={handleSubmit}>
+          <Row>
+            <Col md={{ span: 6, offset: 3 }}>
+              <Form.Group className="mb-3" controlId="team1Input">
+                <Form.Label>Team 1</Form.Label>
+                <Form.Control type="text" id="team1Input" name="team1Input" placeholder="Team 1 ID" />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col md={{ span: 6, offset: 3 }}>
+              <Form.Group className="mb-3" controlId="team2Input">
+                <Form.Label>Team 1</Form.Label>
+                <Form.Control type="text" id="team2Input" name="team2Input" placeholder="Team 2 ID" />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col md={{ span: 6, offset: 3 }}>
+              <Form.Group className="mb-3" controlId="resultTeam1WinBetOddsDiv">
+                <Form.Label>Bet Odds for TEAM 1 WIN</Form.Label>
+                <Form.Control type="text" id="resultTeam1WinBetOddsInput" name="resultTeam1WinBetOddsInput"/>
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col md={{ span: 6, offset: 3 }}>
+              <Form.Group className="mb-3" controlId="resultTieBetOddsDiv">
+                <Form.Label>Bet Odds for DRAW</Form.Label>
+                <Form.Control type="text" id="resultTieBetOddsDiv" name="resultTieBetOddsDiv"/>
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col md={{ span: 6, offset: 3 }}>
+              <Form.Group className="mb-3" controlId="resultTeam2WinBetOddsDiv">
+                <Form.Label>Bet Odds for TEAM 2 WIN</Form.Label>
+                <Form.Control type="text" id="resultTeam2WinBetOddsDiv" name="resultTeam2WinBetOddsDiv"/>
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col md={{ span: 6, offset: 3 }} className="text-center">
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </Container>
+
   );
 }
 
