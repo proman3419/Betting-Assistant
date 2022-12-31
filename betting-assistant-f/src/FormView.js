@@ -1,26 +1,11 @@
 import './App.css';
-import { Link } from 'react-router-dom';
-import ResultView from './ResultView';
-import { Button, ButtonGroup, Dropdown, Form, FormGroup } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 function FormView() {
   function handleSubmit(e) {
-    console.log("ASDSA")
-    console.log(document.getElementById("team1Input").value);
-    console.log(document.getElementById("team2Input").value);
-    console.log(document.getElementById("resultTeam1WinBetOddsInput").value);
-    console.log(document.getElementById("resultTieBetOddsInput").value);
-    console.log(document.getElementById("resultTeam2WinBetOddsInput").value);
-    console.log(JSON.stringify({
-      team1Id: document.getElementById("team1Input").value,
-      team2Id: document.getElementById("team2Input").value,
-      team1Odds: document.getElementById("resultTeam1WinBetOddsInput").value,
-      drawOdds: document.getElementById("resultTieBetOddsInput").value,
-      team2Odds: document.getElementById("resultTeam2WinBetOddsInput").value,
-    }))
     e.preventDefault()
     fetch("http://localhost:8080/chooseTicket", {
       method: "POST",

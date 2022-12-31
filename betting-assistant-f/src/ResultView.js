@@ -7,7 +7,6 @@ function ResultView() {
 
   return (
     <div>{params.get("result")}</div>
-    // <p id="resultDisplay">HELLO</p>
   )
 }
 
